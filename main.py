@@ -57,7 +57,7 @@ def main():
         network_path = join(ROOT, 'model_non_rec.pth')
    
     # Load saved weights
-    state_dict = torch.load(network_path, strict=True)
+    state_dict = torch.load(network_path)
     model.load_state_dict(state_dict)
     model.to(device)
        
