@@ -13,6 +13,7 @@ RUN pip3 install --no-cache-dir -r requirements.txt && rm requirements.txt
 ENV bin /workdir/bin/
 RUN mkdir -p $bin
 WORKDIR $bin
+COPY . .
 
 # the execution will happen in the folder /workdir/exec
 # it will be created by IPOL
