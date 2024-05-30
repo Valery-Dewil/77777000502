@@ -30,9 +30,6 @@ def main():
 
     AlgoInfoFile = open("algo_info.txt", "w")
 
-    print(args.recurrence)
-
-
 
    # Device configuration
     if torch.cuda.is_available():
@@ -50,12 +47,10 @@ def main():
     # Load the model
     if args.recurrence=='recurrent':
         from models import M2Mnet_rec
-        print("is_rec net")
         model = M2Mnet_rec(num_input_frames=args.nb_frames,num_features=args.nb_features)
         init_rec = torch.zeros((1, 3, H, W)).to(device)
         network_path = join(ROOT, 'model_rec.pth')
     else:  
-        print("non rec")
         from models import M2Mnet_non_rec
         model = M2Mnet_non_rec(num_input_frames=args.nb_frames,num_features=args.nb_features)
         network_path = join(ROOT, 'model_non_rec.pth')
@@ -97,11 +92,9 @@ def main():
     # Compute result
     with torch.no_grad():
         if args.recurrence=='recurrent':
-            print("is_rec net")
             out1 = model(init_rec, stack)
             init_rec = out1[:,-3:].clone()
         else:
-            print("non rec")
             out1 = model(stack)
 
 
@@ -120,10 +113,8 @@ def main():
     # Compute result
     with torch.no_grad():
         if args.recurrence=='recurrent':
-            print("is_rec net")
             out2 = model(init_rec, stack)
         else:
-            print("non rec")
             out2 = model(stack)
 
     # If available (only if we provide clean frames and add noise), we compute the PSNR and SSIM (average on the two stacks)
