@@ -30,7 +30,7 @@ def main():
 
     AlgoInfoFile = open("algo_info.txt", "w")
 
-    print(args.recurrent)
+    print(args.recurrence)
 
 
 
