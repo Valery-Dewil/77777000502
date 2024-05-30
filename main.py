@@ -123,7 +123,7 @@ def main():
         AlgoInfoFile.write("is_gt=1") #for the choice of the IPOL gallery
         iio.write("gt.png", u11.detach().cpu().numpy().squeeze().transpose(1,2,0)) 
         PSNR = (psnr(stack1_gt, out1) + psnr(stack2_gt, out2)) / 2
-        SSIM = (ssim(255*stack1_gt, 255*out1) + ssim(255*stack2_gt, 255*out2)) / 2
+        SSIM = (ssim(stack1_gt, out1) + ssim(stack2_gt, out2)) / 2
         print("Evalutation:")
         print("PSNR = {:4.2f}dB, SSIM = {:4.3f}".format(PSNR, SSIM))
     

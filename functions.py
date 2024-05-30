@@ -13,7 +13,7 @@ def psnr(img1, img2, peak=1):
     '''
     Computes the PSNR 'metric' between two images assumed to be in the range [0,1]
     '''
-    x = ((np.array(img1).squeeze() - np.array(img2).squeeze()).flatten())
+    x = (img1-img2).detach().cpu().numpy().squeeze().flatten()
     return (10*np.log10(peak**2 / np.mean(x**2)))
 
 
@@ -25,4 +25,4 @@ def reads_image(path, im_range, device):
     image = torch.Tensor(image).to(device)
     return image
 
-ssim = lambda x, y : structural_similarity(x.astype(float),y.astype(float), data_range=255, channel_axis=2)
+ssim = lambda x, y : structural_similarity(x.detach().cpu().numpy().squeeze().transpose(1,2,0),y.detach().cpu().numpy().squeeze().transpose(1,2,0), data_range=1, channel_axis=2)
