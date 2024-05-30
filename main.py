@@ -92,7 +92,7 @@ def main():
         
     # Compute result
     with torch.no_grad():
-        if args['rec']:
+        if args.recurrence=='recurrent':
             out1 = model(init_rec, stack)
             init_rec = out1[:,-3:].clone()
         else:
