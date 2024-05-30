@@ -80,7 +80,7 @@ def main():
     u14 = reads_image('input_13.png', args['im_range'], device)
 
     # Gathered the frames of the first stack in a single tensor  
-    inframes = [u1, u2 u3, u4, u5, u6, u7]
+    inframes = [u1, u2, u3, u4, u5, u6, u7]
     stack = torch.stack(inframes, dim=0).contiguous().view((1, args['nb_frames']*C, H, W)).to(device)
 
     #Add noise if needed
@@ -100,7 +100,7 @@ def main():
 
 
     # Gathered the frames of the second stack in a single tensor  
-    inframes = [u8, u9 u10, u11, u12, u13, u14]
+    inframes = [u8, u9, u10, u11, u12, u13, u14]
     stack = torch.stack(inframes, dim=0).contiguous().view((1, args['nb_frames']*C, H, W)).to(device)
 
     #Add noise if needed and save the noisy middle frame
