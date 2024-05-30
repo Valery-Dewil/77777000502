@@ -1,2 +1,6 @@
-numpy==1.22.3
-iio==0.0.3
+numpy==1.26.4
+iio==16
+scikit-image==0.22.0
+scikit-learn==1.4.1.post1
+scipy==1.12.0
+
