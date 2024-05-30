@@ -43,7 +43,7 @@ def main():
 
     # Initialisation
     u1 = iio.read("input_0.png")
-    H, W, C = ut.shape
+    H, W, C = u1.shape
 
     # Load the model
     if args.recurrence=='recurrent':
