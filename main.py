@@ -107,8 +107,7 @@ def main():
     if args.add_noise:
         stack2_gt = stack.clone()
         stack = stack + torch.normal(0, args.sigma / args.im_range, stack.shape).to(device)
-        noisy = stack[0,C*(args.nb_frames//2):C*(args.nb_frames//2+1)].detach().cpu().numpy().squeeze().transpose(1,2,0)
-        print(noisy.shape, stack.shape)
+        noisy = 255*stack[0,C*(args.nb_frames//2):C*(args.nb_frames//2+1)].detach().cpu().numpy().squeeze().transpose(1,2,0)
         iio.write("noisy.tiff", noisy)
         iio.write("noisy.png", noisy.round().clip(0,255).astype(np.uint8))
         
@@ -125,12 +124,14 @@ def main():
         iio.write("gt.png", u11.detach().cpu().numpy().squeeze().transpose(1,2,0)) 
         PSNR = (psnr(stack1_gt, out1) + psnr(stack2_gt, out2)) / 2
         SSIM = (ssim(stack1_gt, out1) + ssim(stack2_gt, out2)) / 2
+        print("")
+        print("")
+        print("------------------------------------------------------------------------------")
         print("Evalutation:")
         print("PSNR = {:4.2f}dB, SSIM = {:4.3f}".format(PSNR, SSIM))
     
     # Store result
     output = 255*out2[0,C*(args.nb_frames//2):C*(args.nb_frames//2+1)].detach().cpu().numpy().squeeze().transpose(1,2,0)
-    print(output.shape, out2.shape)
     iio.write("output.tiff", output)
     iio.write("output.png", output.round().clip(0,255).astype(np.uint8))
 
