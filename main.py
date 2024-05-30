@@ -121,7 +121,7 @@ def main():
     # If available (only if we provide clean frames and add noise), we compute the PSNR and SSIM (average on the two stacks)
     if args.add_noise:
         AlgoInfoFile.write("is_gt=1") #for the choice of the IPOL gallery
-        iio.write("gt.png", u11.detach().cpu().numpy().squeeze().transpose(1,2,0)) 
+        iio.write("gt.png", (255*u11).detach().cpu().numpy().squeeze().transpose(1,2,0)) 
         PSNR = (psnr(stack1_gt, out1) + psnr(stack2_gt, out2)) / 2
         SSIM = (ssim(stack1_gt, out1) + ssim(stack2_gt, out2)) / 2
         print("")
